@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -119,8 +120,20 @@ public final class UseListsAndMaps {
          *
          * Oceania -> 38,304,000
          */
+        Map<String, Long> world = new HashMap<>();
+        world.put("Africa", 1_110_635_000l);
+        world.put("Americas", 972_005_000l);
+        world.put("Antartica", 0l);
+        world.put("Asia", 4_298_723_000l);
+        world.put("Europe", 742_452_000l);
+        world.put("Oceania", 38_304_000l);
         /*
          * 8) Compute the population of the world
          */
+        long worldPopulation = 0;
+        for(var i : world.values()){
+            worldPopulation+=i;
+        }
+        System.out.println(worldPopulation);
     }
 }
