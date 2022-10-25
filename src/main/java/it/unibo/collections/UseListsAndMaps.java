@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Example class using {@link List} and {@link Map}.
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 public final class UseListsAndMaps {
 
     //private static Integer remove;
+    private static final int ELEMS = 100_000;
 
     private UseListsAndMaps() {
     }
@@ -61,12 +63,46 @@ public final class UseListsAndMaps {
          * using the previous lists. In order to measure times, use as example
          * TestPerformance.java.
          */
+        long time = System.nanoTime();
+
+        for (int i = 1; i <= ELEMS; i++) {
+            al.add(0,1);
+        }
+        time = System.nanoTime() - time;
+        var millis = TimeUnit.NANOSECONDS.toMillis(time);
+        System.out.println(millis+ " ms to add 100.000 elems in a ArrayList");
+
+
+        time = System.nanoTime();
+        for (int i = 1; i <= ELEMS; i++) {
+            li.add(0,1);
+        }
+        time = System.nanoTime() - time;
+        millis = TimeUnit.NANOSECONDS.toMillis(time);
+        System.out.println(millis+ " ms to add 100.000 elems in a LinkedList");
+
         /*
          * 6) Measure the performance of reading 1000 times an element whose
          * position is in the middle of the collection for both ArrayList and
          * LinkedList, using the collections of point 5. In order to measure
          * times, use as example PerfTest.java.
          */
+        time = System.nanoTime();
+        for (int i = 1; i <= 1000; i++) {
+            al.get(al.size()/2);
+        }
+        time = System.nanoTime() - time;
+        millis = TimeUnit.NANOSECONDS.toMillis(time);
+        System.out.println(millis+ " ms to read 1.000 elems in a ArrayList");
+
+
+        time = System.nanoTime();
+        for (int i = 1; i <= 1000; i++) {
+            li.get(li.size()/2);
+        }
+        time = System.nanoTime() - time;
+        millis = TimeUnit.NANOSECONDS.toMillis(time);
+        System.out.println(millis+ " ms to read 1.000 elems in a LinkedList");
         /*
          * 7) Build a new Map that associates to each continent's name its
          * population:
